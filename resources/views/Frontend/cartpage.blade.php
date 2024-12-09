@@ -2,7 +2,7 @@
 @extends('Frontend.Layout.main')
 
 @section('main-container')
-<h2 style="text-align: center; font-size: 32px; color: #333; margin-bottom: 20px; margin-top:20px;">Cart Page</h2>
+<h2 style="text-align: center; font-size: 32px; color: #333; margin-bottom: 20px; margin-top:30px;">Cart Page</h2>
 
 <div style="margin: 50px auto; max-width: 900px; background-color: #f5f5f5; padding: 30px; border-radius: 8px;">
     <!-- Cart Page Title -->
@@ -27,8 +27,8 @@
 
 
             <div style="flex-basis: 20%; text-align: right;">
-                <button onclick="removeFromCart('{{ $item['product_id'] }}')" style="background-color: #d9534f; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-                    <i class="bi bi-trash"></i> Remove
+                <button onclick="removeFromCart('{{ $item['product_id'] }}')" style="background-color: rgb(222, 68, 68); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                    <i class="fa fa-fw fa-trash-alt"></i>
                 </button>
             </div>
         </div>

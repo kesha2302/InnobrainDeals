@@ -19,22 +19,25 @@
 
 
 
-    <section class="bg-success py-5">
+    <section class="bg-light py-5">
+        @foreach ($aboutus as $ab)
         <div class="container">
             <div class="row align-items-center py-5">
-                <div class="col-md-8 text-white">
-                    <h1>About Us</h1>
+                <div class="col-md-10 text-black">
+                    <h1>{{$ab->title}}</h1>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        {{$ab->description1}}
+                    </p>
+                    <p>
+                        {{$ab->description2}}
                     </p>
                 </div>
-                <div class="col-md-4">
+                {{-- <div class="col-md-4">
                     <img src="assets/img/about-hero.svg" alt="About Hero">
-                </div>
+                </div> --}}
             </div>
         </div>
+        @endforeach
     </section>
     <!-- Close Banner -->
 
@@ -53,28 +56,28 @@
 
             <div class="col-md-6 col-lg-3 pb-5">
                 <div class="h-100 py-5 services-icon-wap shadow">
-                    <div class="h1 text-success text-center"><i class="fa fa-truck fa-lg"></i></div>
+                    <div class="h1 text-dark text-center"><i class="fa fa-truck fa-lg"></i></div>
                     <h2 class="h5 mt-4 text-center">Delivery Services</h2>
                 </div>
             </div>
 
             <div class="col-md-6 col-lg-3 pb-5">
                 <div class="h-100 py-5 services-icon-wap shadow">
-                    <div class="h1 text-success text-center"><i class="fas fa-exchange-alt"></i></div>
+                    <div class="h1 text-dark text-center"><i class="fas fa-exchange-alt"></i></div>
                     <h2 class="h5 mt-4 text-center">Shipping & Return</h2>
                 </div>
             </div>
 
             <div class="col-md-6 col-lg-3 pb-5">
                 <div class="h-100 py-5 services-icon-wap shadow">
-                    <div class="h1 text-success text-center"><i class="fa fa-percent"></i></div>
+                    <div class="h1 text-dark text-center"><i class="fa fa-percent"></i></div>
                     <h2 class="h5 mt-4 text-center">Promotion</h2>
                 </div>
             </div>
 
             <div class="col-md-6 col-lg-3 pb-5">
                 <div class="h-100 py-5 services-icon-wap shadow">
-                    <div class="h1 text-success text-center"><i class="fa fa-user"></i></div>
+                    <div class="h1 text-dark text-center"><i class="fa fa-user"></i></div>
                     <h2 class="h5 mt-4 text-center">24 Hours Service</h2>
                 </div>
             </div>

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Aboutus;
 use App\Models\Banner;
 use App\Models\Category;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -14,7 +16,8 @@ class HomeController extends Controller
     }
     public function About()
     {
-        return view('Frontend.About');
+        $aboutus = Aboutus::all();
+        return view('Frontend.About', compact('aboutus'));
     }
     public function Service()
     {
@@ -22,7 +25,8 @@ class HomeController extends Controller
     }
     public function Contact()
     {
-        return view('Frontend.Contact');
+        $contactus = Contact::all();
+        return view('Frontend.Contact', compact('contactus'));
     }
     public function Product()
     {
@@ -41,5 +45,7 @@ class HomeController extends Controller
 
     return view('Frontend.allproducts', compact('categories'));
     }
+
+
 }
 

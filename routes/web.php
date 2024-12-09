@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\AdminProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,10 @@ Route::get('/allproducts', [HomeController::class, 'allproducts']);
 Route::get('/cart',[CartController::class,'cart'])->name('cart.view');
 Route::post('/cart', [CartController::class, 'addToCart'])->name('cart.add');
 Route::post('/cart/remove', [CartController::class,'removeFromCart'])->name('cart.remove');
+
+
+// Checkout Details
+Route::get('/checkoutpage',[CheckoutController::class,'checkout']);
 
 //Admin Details
 Route::get('/Admin', [AdminController::class, 'adminhome']);

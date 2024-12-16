@@ -6,6 +6,8 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Cartsession;
 
 class CartController extends Controller
 {
@@ -72,7 +74,7 @@ public function removeFromCart(Request $request)
 {
     // $user = Auth::user();
 
-    $id = $request->id; // Get the product ID from the request
+    $id = $request->id;
     $cart = Session::get('cart', []);
 
     if (isset($cart[$id])) {
@@ -80,13 +82,12 @@ public function removeFromCart(Request $request)
         Session::put('cart', $cart);
 
 
-        // if (Auth::check()) {
+        if (Auth::check()) {
 
-        //     $user = Auth::user();
-        //     Cartsession::where('customer_id', $user->customer_id)->delete();
-        // }
+            $user = Auth::user();
+            Cartsession::where('customer_id', $user->customer_id)->delete();
+        }
 
-        // Cartsession::where('customer_id', $user->customer_id)->delete();
 
         return response()->json(['success' => 'Item removed from the cart successfully!']);
     }

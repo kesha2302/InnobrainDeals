@@ -1,24 +1,30 @@
 @extends('AdminPanel.layout.main')
 
 @section('main-container')
+
+@if (session('delete'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('delete') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
 <div class='mt-3 container'>
-    <h3>Orders</h3>
+    <h3>Cartsession Data</h3>
     <hr>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
+            <div class="ms-auto d-flex">
+                <form action="{{ route('admin.cartsessions.delete') }}" method="POST" onsubmit="return confirm('Are you sure you want to delete all records?');">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-dark btn-circle font-rights me-md-2">
+                        <i class="bi bi-plus"></i> Delete
+                    </button>
+                </form>
 
-            <form class="d-flex" action="">
-                <input class="form-control me-5 mr-sm-2" type="search" value="{{$search}}" name="search"
-                placeholder="Search by customer name" aria-label="Search" style="width: 500px;">
-                <button class="btn btn-dark">Search</button>
-                <span style="margin-left: 10px;">
-                    <a href="{{url('/Adminorder')}}">
-                        <button class="btn btn-dark" type="button">Reset</button>
-                    </a>
-                </span>
-            </form>
-
+            </div>
         </div>
     </nav>
 
@@ -29,29 +35,25 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th style="width: 10%;">Order Id</th>
+                            <th style="width: 10%;">Id</th>
                             <th style="width: 10%;">Customer</th>
                             <th style="width: 10%;">Product Ids</th>
                             <th style="width: 10%;">Product Names</th>
                             <th style="width: 10%;">Price</th>
-                            <th style="width: 10%;">Total Cost</th>
-                            <th style="width: 10%;">Action</th>
-                            <th style="width: 10%;">Status</th>
+                            <th style="width: 10%;">Discount Price</th>
                             <th style="width: 10%;">Created At</th>
                             <th style="width: 10%;">Updated At</th>
                         </tr>
                     </thead>
                     <tbody>
-
-
-                        @foreach ($orders as $order )
+                        @foreach ($cartsession as $cs )
                         <tr>
-                            <td>{{$order->order_id}}</td>
-                            <td>{{$order->customer->fullname}}</td>
+                            <td>{{$cs->cartsession_id}}</td>
+                            <td>{{$cs->customer->fullname}}</td>
                             <td>
                                 <ul>
                                     @php
-                                        $Productids = explode(',', $order->product_ids);
+                                        $Productids = explode(',', $cs->product_ids);
                                     @endphp
                                     @foreach ($Productids as $ids)
                                         <li>{{ $ids }}</li>
@@ -61,7 +63,7 @@
                             <td>
                                 <ul>
                                     @php
-                                        $Productnames = explode(',', $order->product_name);
+                                        $Productnames = explode(',', $cs->name);
                                     @endphp
                                     @foreach ($Productnames as $name)
                                         <li>{{ $name }}</li>
@@ -71,34 +73,25 @@
                             <td>
                                 <ul>
                                     @php
-                                        $Prices = explode(',', $order->price);
+                                        $Prices = explode(',', $cs->price);
                                     @endphp
                                     @foreach ($Prices as $price)
                                         <li>₹{{ $price }}</li>
                                     @endforeach
                                 </ul>
                             </td>
-                            <td>₹{{$order->total_cost}}</td>
                             <td>
-                                <a class="btn btn-primary" href="{{ route('admin.viewOrder', $order->order_id) }}" role="button">View Product</a>
+                                <ul>
+                                    @php
+                                        $DPrices = explode(',', $cs->discount_price);
+                                    @endphp
+                                    @foreach ($DPrices as $price)
+                                        <li>₹{{ $price }}</li>
+                                    @endforeach
+                                </ul>
                             </td>
-                            {{-- <td>
-                                <span class="badge text-bg-primary">Pending</span>
-                            </td> --}}
-
-                        <td>
-                            @if ($order->status === 'Activated')
-                                <span class="badge text-bg-success">Activated</span>
-                            @elseif ($order->status === 'Partially Activated')
-                                <span class="badge text-bg-warning">Partially Activated</span>
-                            @else
-                                <span class="badge text-bg-primary">Pending</span>
-                            @endif
-                        </td>
-
-
-                            <td>{{$order->created_at}}</td>
-                            <td>{{$order->updated_at}}</td>
+                            <td>{{$cs->created_at}}</td>
+                            <td>{{$cs->updated_at}}</td>
                         </tr>
                         @endforeach
                     </tbody>

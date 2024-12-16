@@ -9,7 +9,13 @@ use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\AdminProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\ForgotpasswordController;
+use App\Http\Controllers\GuestorderController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -25,6 +31,19 @@ Route::get('/Product',[HomeController::class,'Product']);
 
 Route::get('/banners', [HomeController::class, 'banner']);
 Route::get('/allproducts', [HomeController::class, 'allproducts']);
+Route::get('/category/{id}', [HomeController::class, 'categoryshow'])->name('category.show');
+
+
+//Login and Forgot Password
+Route::get('/Login',[LoginController::class,'loginview']);
+Route::get('/register',[LoginController::class,'registerview']);
+Route::post('/Signup2', [LoginController::class, 'signupdata']);
+Route::post('/Login2',[LoginController::class, 'logindata']);
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/forgotpassword',[ForgotpasswordController::class,'forgotpasswordload']);
+Route::post('/resetpasswordlink', [ForgotpasswordController::class, 'forgotpassword'])->name('resetpasswordlink');
+Route::get('/reset-password',[ForgotpasswordController::class,'resetpasswordload']);
+Route::post('/resetpasswordset', [ForgotpasswordController::class, 'resetpassword'])->name('resetpasswordset');
 
 
 //Cart Details
@@ -35,15 +54,27 @@ Route::post('/cart/remove', [CartController::class,'removeFromCart'])->name('car
 
 // Checkout Details
 Route::get('/checkoutpage',[CheckoutController::class,'checkout']);
+Route::post('/checkout-submit', [CheckoutController::class, 'checkoutSubmit'])->name('checkout.submit');
+
+// Payment Raoutes
+Route::post('/handlepayment',[PaymentController::class,'handlepayment']);
+
+// Profile Routes
+Route::get('/edit-profile', [ProfileController::class, 'edit']);
+Route::post('/edit-profile2', [ProfileController::class, 'update']);
+Route::get('/orderhistory',[ProfileController::class, 'orderhistory']);
 
 //Admin Details
 Route::get('/Admin', [AdminController::class, 'adminhome']);
 
 Route::get('/Admin_customersdetail', [AdminController::class, 'admincustomerdetail']);
 Route::get('/Admin_guestuserdetail', [AdminController::class, 'guestuserdetail']);
-Route::get('/Adminorder', [AdminController::class, 'adminorder']);
+Route::get('/Adminorder', [AdminController::class, 'adminorder'])->name('Adminorder');
 Route::get('/Admincheckoutdetails', [AdminController::class, 'admincheckout']);
-Route::get('/Admin_guestorders', [AdminController::class, 'guestorderdetail']);
+Route::get('/Admin_guestorders', [AdminController::class, 'guestorderdetail'])->name('Admin_guestorders');
+Route::get('/Admincartsession', [AdminController::class, 'cartsession']);
+Route::delete('/admin/cartsessions/delete', [AdminController::class, 'deleteAll'])->name('admin.cartsessions.delete');
+
 
 // Admin Login
 Route::get('/AdminSignup', [AdminLoginController::class, 'signup']);
@@ -111,3 +142,15 @@ Route::post('/product/update/{id}',[AdminProductController::class,'productupdate
 Route::get('/product/delete/{id}',[AdminProductController::class,'productdelete'])->name('product.delete');
 Route::get('/product/frocedelete/{id}',[AdminProductController::class,'productforcedelete'])->name('product.forcedelete');
 Route::get('/product/restore/{id}',[AdminProductController::class,'productrestore'])->name('product.restore');
+
+
+//Admin Registeruser OrderController(Activation Link)
+Route::get('/Adminorder/{orderId}', [OrderController::class, 'viewOrder'])->name('admin.viewOrder');
+Route::get('/send-activation/{orderId}/{productId}', [OrderController::class, 'showActivationForm'])->name('send.activation');
+Route::post('/send-activationlink', [OrderController::class, 'sendActivation'])->name('send.activationlink');
+
+
+//Admin Guestuser GuestorderController(Activation Link)
+Route::get('/Adminguestorder/{gorderId}', [GuestorderController::class, 'viewOrder'])->name('admin.guestviewOrder');
+Route::get('/Sendactivationlink/{orderId}/{productId}', [GuestorderController::class, 'showActivationForm'])->name('send.guestactivation');
+Route::post('/send-guestactivationlink', [GuestorderController::class, 'sendActivation'])->name('send.guestactivationlink');

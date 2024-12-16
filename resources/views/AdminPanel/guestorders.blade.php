@@ -34,6 +34,8 @@
                             <th style="width: 10%;">Product Names</th>
                             <th style="width: 10%;">Price</th>
                             <th style="width: 10%;">Total Cost</th>
+                            <th style="width: 10%;">Action</th>
+                            <th style="width: 10%;">Status</th>
                             <th style="width: 10%;">Created At</th>
                             <th style="width: 10%;">Updated At</th>
                         </tr>
@@ -73,6 +75,18 @@
                                 </ul>
                             </td>
                             <td>₹{{$guestorders->total_cost}}</td>
+                            <td>
+                                <a class="btn btn-primary" href="{{ route('admin.guestviewOrder', $guestorders->guestorder_id) }}" role="button">View Product</a>
+                            </td>
+                            <td>
+                                @if ($guestorders->status === 'Activated')
+                                    <span class="badge text-bg-success">Activated</span>
+                                @elseif ($order->status === 'Partially Activated')
+                                    <span class="badge text-bg-warning">Partially Activated</span>
+                                @else
+                                    <span class="badge text-bg-primary">Pending</span>
+                                @endif
+                            </td>
                             <td>{{$guestorders->created_at}}</td>
                             <td>{{$guestorders->updated_at}}</td>
                         </tr>

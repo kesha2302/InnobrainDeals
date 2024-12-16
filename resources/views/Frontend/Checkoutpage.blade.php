@@ -16,8 +16,8 @@
                                 <div class="col-md-12">
                                     <h4 class="text-primary">Basic Information</h4>
                                     <hr>
-                                    <form id="bookdetail" method="POST" action="">
-                                        {{-- <form id="bookdetail" method="POST" action="{{ route('checkout.submit') }}"> --}}
+
+                                        <form id="bookdetail" method="POST" action="{{ route('checkout.submit') }}" >
                                         @csrf
                                         <div class="row">
                                             <div class="col-md-12 mb-3">
@@ -52,20 +52,22 @@
                         </div>
                     </div>
 
-                    {{-- <div class="container text-center mx-auto">
+                    <div class="container text-center mx-auto">
                         <div class="d-flex justify-content-center">
                             <form action="/handlepayment" method="post">
                                 @csrf
-                                <script src="https://checkout.razorpay.com/v1/checkout.js"
+                                <script
+                                src="https://checkout.razorpay.com/v1/checkout.js"
                                     data-key="{{ env('RAZOR_KEY') }}"
-                                    data-amount="{{ session('totalPrice') * 100 }}"
+                                    data-amount="{{ session('totalAmount') * 100 }}"
                                     data-currency="INR"
                                     data-buttontext="Pay"
                                     data-description="Test transaction"
-                                    data-theme.color="#0000FF"></script>
+                                    data-theme.color="#0000FF"
+                                    ></script>
                             </form>
                         </div>
-                    </div> --}}
+                    </div>
                 </div>
             </div>
         </div>
@@ -95,6 +97,7 @@
         xhr.setRequestHeader('X-CSRF-Token', '{{ csrf_token() }}');
         xhr.send(formData);
     }
+
 </script>
 
 @endsection

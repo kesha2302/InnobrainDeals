@@ -2,7 +2,7 @@
 
 @section('main-container')
       <div class="container" >
-<h1 class="pt-3">Veehaagate</h1>
+<h1 class="pt-3">InnoBrain Deals</h1>
 
             <div class="row">
                 <div class="col">

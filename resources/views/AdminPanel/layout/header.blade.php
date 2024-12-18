@@ -103,6 +103,14 @@
                 </a>
               </li>
               <li class="sidebar-item">
+                <a class="sidebar-link" href="{{url('/Adminpopularproducts')}}" aria-expanded="false">
+                  <span>
+                    <i class="ti ti-package"></i>
+                  </span>
+                  <span class="hide-menu">Popular Products Detail</span>
+                </a>
+              </li>
+              <li class="sidebar-item">
                 <a class="sidebar-link" href="{{url('/Adminorder')}}" aria-expanded="false">
                   <span>
                     <i class="ti ti-shopping-cart"></i>

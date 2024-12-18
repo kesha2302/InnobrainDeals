@@ -11,7 +11,7 @@
                     <div class="card h-100" style="border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
                         <img src="{{ asset('productsimg/' . $product->image) }}" alt="{{ $product->name }}"
                             class="card-img-top"
-                            style="width: 100%; height: 200px; border-radius: 15px 15px 0 0;">
+                            style="width: 150px; height: 150px; object-fit: cover; border-radius: 10px 10px 10px 10px; margin: 10px auto; display: block; margin-top:20px;">
                         <div class="card-body text-center">
                             <h5 class="card-title" style="font-size: 1.1rem;">{{ $product->name }}</h5>
                             <p class="card-text" style="font-size: 13px;">

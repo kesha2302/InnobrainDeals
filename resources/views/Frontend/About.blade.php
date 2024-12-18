@@ -41,7 +41,7 @@
     </section>
     <!-- Close Banner -->
 
-    <!-- Start Section -->
+    {{-- <!-- Start Section -->
     <section class="container py-5">
         <div class="row text-center pt-5 pb-3">
             <div class="col-lg-6 m-auto">
@@ -187,7 +187,7 @@
             </div>
         </div>
     </section>
-    <!--End Brands-->
+    <!--End Brands--> --}}
 
 
     <!-- Start Footer -->

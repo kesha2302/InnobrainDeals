@@ -22,7 +22,7 @@
                                         <div class="row">
                                             <div class="col-md-12 mb-3">
                                                 <label>Full Name:</label>
-                                                <input type="text" name="name" class="form-control" placeholder="Enter Name" onchange="submitForm()" required/>
+                                                <input type="text" id="name" name="name" class="form-control" placeholder="Enter Name" onchange="submitForm()" required/>
                                             </div>
                                             @error('name')
                                             <div class="text-danger">{{ $message }}</div>
@@ -30,7 +30,7 @@
 
                                             <div class="col-md-12 mb-3">
                                                 <label>Email Address:</label>
-                                                <input type="email" name="email" class="form-control" placeholder="Enter Email Address" onchange="submitForm()" required/>
+                                                <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email Address" onchange="submitForm()" required/>
                                             </div>
                                             @error('email')
                                             <div class="text-danger">{{ $message }}</div>
@@ -38,7 +38,7 @@
 
                                             <div class="col-md-12 mb-3">
                                                 <label>Contact Number:</label>
-                                                <input type="text" name="contact_number" class="form-control" placeholder="Enter Phone Number" onchange="submitForm()" required/>
+                                                <input type="text" id="contact_number" name="contact_number" class="form-control" placeholder="Enter Phone Number" onchange="submitForm()" required/>
                                             </div>
                                             @error('contact_number')
                                             <div class="text-danger">{{ $message }}</div>
@@ -54,7 +54,9 @@
 
                     <div class="container text-center mx-auto">
                         <div class="d-flex justify-content-center">
-                            <form action="/handlepayment" method="post">
+
+                            <div id="razorpay-button-container" style="display:none;">
+                            <form action="/handlepayment" method="post" id="razorpayForm" >
                                 @csrf
                                 <script
                                 src="https://checkout.razorpay.com/v1/checkout.js"
@@ -64,8 +66,11 @@
                                     data-buttontext="Pay"
                                     data-description="Test transaction"
                                     data-theme.color="#0000FF"
+                                    id="razorpay-button"
                                     ></script>
                             </form>
+                        </div>
+
                         </div>
                     </div>
                 </div>
@@ -75,9 +80,22 @@
 </div>
 
 <script>
+
     function submitForm() {
         var form = document.getElementById('bookdetail');
         var formData = new FormData(form);
+
+        var name = document.getElementById('name').value;
+        var email = document.getElementById('email').value;
+        var contact_number = document.getElementById('contact_number').value;
+
+        if (name && email && contact_number) {
+            // Show Razorpay button if all fields are filled
+            document.getElementById('razorpay-button-container').style.display = 'block';
+        } else {
+            // Hide Razorpay button if any field is empty
+            document.getElementById('razorpay-button-container').style.display = 'none';
+        }
 
         // Send form data using AJAX
         var xhr = new XMLHttpRequest();
@@ -100,4 +118,6 @@
 
 </script>
 
+
 @endsection
+

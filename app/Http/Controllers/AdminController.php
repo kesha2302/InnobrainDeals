@@ -21,12 +21,15 @@ class AdminController extends Controller
         $totalOrders = Order::count();
         $totalCategories = Category::count();
         $totalProducts = Product::count();
+        $totalGuestusers = Guestuser::count();
+        $totalGuestOrders = Guestorder::count();
 
-        return view('AdminPanel.index',compact('totalCustomers','totalOrders','totalCategories','totalProducts'));
+        return view('AdminPanel.index',compact('totalCustomers','totalOrders','totalCategories',
+        'totalProducts','totalGuestusers','totalGuestOrders'));
     }
 
     //Customer Details
-    public function admincustomerdetail()
+    public function admincustomerdetail(Request $request)
     {
         $search=$request['search']??"";
         if($search!=""){
@@ -42,11 +45,11 @@ class AdminController extends Controller
     }
 
     // Guest Users Detail
-    public function guestuserdetail()
+    public function guestuserdetail(Request $request)
     {
         $search=$request['search']??"";
         if($search!=""){
-            $guestuser=Guestuser::where('name',"LIKE","%$search%")
+            $guestuser=Guestuser::where('guestorder_id',"LIKE","%$search%")
             ->orWhere('guestorder_id', 'LIKE', "%$search%")
             ->get();
         }
@@ -60,7 +63,7 @@ class AdminController extends Controller
     }
 
     // Register Users Detail
-    public function adminorder()
+    public function adminorder(Request $request)
     {
 
         $search=$_REQUEST['search']??"";
@@ -97,7 +100,7 @@ class AdminController extends Controller
     }
 
     // Register Users Checkout Detail
-    public function admincheckout()
+    public function admincheckout(Request $request)
     {
 
         $search=$_REQUEST['search']??"";
@@ -115,7 +118,7 @@ class AdminController extends Controller
     }
 
     // Guest Users Order Detail
-    public function guestorderdetail()
+    public function guestorderdetail(Request $request)
     {
         $search=$request['search']??"";
         if($search!=""){

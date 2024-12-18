@@ -30,7 +30,7 @@ class ProfileController extends Controller
 
             $user->save();
 
-            return redirect('/edit-profile')->with('success', 'Profile updated successfully');
+            return redirect('/edit-profile')->with('successmessage', 'Profile updated successfully');
         } else {
 
             return redirect('/edit-profile')->with('error', 'Failed to update profile. User not found or invalid.');

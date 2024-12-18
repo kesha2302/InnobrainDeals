@@ -68,7 +68,6 @@ class AdminProductController extends Controller
         $product->image = $fileName;
     }
 
-
     $product->save();
 
     return redirect('/Adminproduct');

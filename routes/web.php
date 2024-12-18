@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminContactController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminLoginController;
+use App\Http\Controllers\AdminPopularproductController;
 use App\Http\Controllers\AdminProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
@@ -32,7 +33,7 @@ Route::get('/Product',[HomeController::class,'Product']);
 Route::get('/banners', [HomeController::class, 'banner']);
 Route::get('/allproducts', [HomeController::class, 'allproducts']);
 Route::get('/category/{id}', [HomeController::class, 'categoryshow'])->name('category.show');
-
+Route::get('/popularproducts', [HomeController::class, 'popularproducts']);
 
 //Login and Forgot Password
 Route::get('/Login',[LoginController::class,'loginview']);
@@ -154,3 +155,10 @@ Route::post('/send-activationlink', [OrderController::class, 'sendActivation'])-
 Route::get('/Adminguestorder/{gorderId}', [GuestorderController::class, 'viewOrder'])->name('admin.guestviewOrder');
 Route::get('/Sendactivationlink/{orderId}/{productId}', [GuestorderController::class, 'showActivationForm'])->name('send.guestactivation');
 Route::post('/send-guestactivationlink', [GuestorderController::class, 'sendActivation'])->name('send.guestactivationlink');
+
+
+//Admin Popular Products Routes
+Route::get('/Adminpopularproducts', [AdminPopularproductController::class, 'popularproductview']);
+Route::get('/Adminpopularproductform', [AdminPopularproductController::class, 'adminpopularproductform']);
+Route::post('/Adminpopularproductform2', [AdminPopularproductController::class, 'popularproductform']);
+Route::get('/popularproduct/delete/{id}',[AdminPopularproductController::class,'popularproductdelete'])->name('pp.delete');

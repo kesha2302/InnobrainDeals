@@ -6,6 +6,7 @@ use App\Models\Aboutus;
 use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Contact;
+use App\Models\PopularProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -45,20 +46,22 @@ class HomeController extends Controller
         $categories = Category::with('products')->get();
 
     return view('Frontend.allproducts', compact('categories'));
+
     }
 
     public function categoryshow($id)
     {
-        // Fetch the category by ID
         $categories = Category::findOrFail($id);
 
-        // Fetch products related to the category
         $products = Product::where('category_id', $id)->get();
 
-        // Return the view with the category and its products
         return view('Frontend.allcategoryproduct', compact('categories', 'products'));
     }
 
+    public function popularproducts()
+    {
+        $popularproducts = PopularProduct::with('product')->get();
+        return view('Frontend.popularproducts', compact('popularproducts'));
+    }
 
 }
-

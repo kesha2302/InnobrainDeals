@@ -34,7 +34,6 @@ class LoginController extends Controller
 
         ]);
 
-
         if ($validator->fails()) {
             return redirect()->back()
                              ->withErrors($validator)
@@ -91,7 +90,7 @@ class LoginController extends Controller
                 $names = explode(',', $previousCartData->name);
                 $prices = explode(',', $previousCartData->price);
                 $discountPrices = explode(',', $previousCartData->discount_price);
-                $quantities = explode(',', $previousCartData->quantity);
+                // $quantities = explode(',', $previousCartData->quantity);
                 $images = explode(',', $previousCartData->image);
 
                 foreach ($productIds as $index => $productId) {

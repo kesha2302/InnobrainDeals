@@ -13,7 +13,7 @@
                 placeholder="Search by ordersid" aria-label="Search" style="width: 500px;">
                 <button class="btn btn-dark">Search</button>
                 <span style="margin-left: 10px;">
-                    <a href="{{url('/Admin_guestguestorderss')}}">
+                    <a href="{{url('/Admin_guestorders')}}">
                         <button class="btn btn-dark" type="button">Reset</button>
                     </a>
                 </span>
@@ -81,7 +81,7 @@
                             <td>
                                 @if ($guestorders->status === 'Activated')
                                     <span class="badge text-bg-success">Activated</span>
-                                @elseif ($order->status === 'Partially Activated')
+                                @elseif ($guestorders->status === 'Partially Activated')
                                     <span class="badge text-bg-warning">Partially Activated</span>
                                 @else
                                     <span class="badge text-bg-primary">Pending</span>
